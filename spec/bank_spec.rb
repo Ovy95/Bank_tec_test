@@ -18,8 +18,18 @@ describe Bank do
   end
 
   it "User can print out a blank statement" do 
-    expect(bank.print_statement).to eq "date || credit || debit || balance"
+    expect(bank.print_statement).to eq ["date || credit || debit || balance"]
   end
+
+  it "User can print out a statement with transactions on it" do 
+    bank.deposit(1000)
+    bank.withdraw(500)
+    expect(bank.print_statement).to eq ["date || credit || debit || balance", "16/04/2020 ||  500     ||  500 ", "16/04/2020 ||  1000     ||  1000 "]
+  end
+
+
+
+
 
 end
 
