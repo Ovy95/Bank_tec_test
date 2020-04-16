@@ -17,6 +17,10 @@ describe Bank do
     expect(bank.balance).to eq -500
   end
 
+  it "User can print out a blank statement" do 
+    expect(bank.print_statement).to eq "date || credit || debit || balance"
+  end
+
 end
 
 
