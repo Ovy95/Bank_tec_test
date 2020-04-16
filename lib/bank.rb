@@ -8,16 +8,18 @@ class Bank
   def deposit(amount)
     @balance += amount
     transactions_history(amount, " ")
-    "Money added"
   end
 
   def withdraw(amount)
+    fail 'Insufficient funds available' if amount > @balance
     @balance -= amount
     transactions_history(amount, " ")
   end 
 
   def print_statement
-   statement = @transactions.reverse.insert(0, "date || credit || debit || balance")
+    statement_header.each do |state|
+      puts state
+    end
   end
 
   private
@@ -25,4 +27,8 @@ class Bank
     date = Time.now.strftime("%d/%m/%Y")
     @transactions << ("#{date} ||  #{deposit}   #{withdraw} ||  #{@balance} ")
   end  
+
+  def statement_header
+    @transactions.reverse.insert(0, "date || credit || debit || balance")
+  end
 end
